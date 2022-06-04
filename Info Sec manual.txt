@@ -1,0 +1,55 @@
+USER MANUAL
+
+- To start, set up a java application with the repository provided here:
+  https://github.com/francxx96/ExamProject
+  However set it up in intellij IDE and with postgres as a database
+
+- Set up a Tomcat server for that application
+  intellij has a plugin you can download for tomcat
+
+- Create a Postgres database
+
+- Create the following tables in the database:
+
+CREATE TABLE users (
+ name varchar(50) NOT NULL,
+ surname varchar(50) NOT NULL,
+ email varchar(50) NOT NULL,
+ password varchar(100) NOT NULL,
+ lastlogin timestamp NOT NULL,
+ CONSTRAINT user_PK PRIMARY KEY (email)
+);
+
+CREATE TABLE mail (
+ sender varchar(50) NOT NULL,
+ receiver varchar(50) NOT NULL,
+ subject varchar(100) NULL,
+ body text NOT NULL,
+ aesKeyR text NOT NULL,
+ aesKeyS text NOT NULL,
+ time timestamp NOT NULL,
+ signature text NOT NULL,
+ CONSTRAINT mail_FK FOREIGN KEY (sender) REFERENCES users (email),
+ CONSTRAINT mail_FK_1 FOREIGN KEY (receiver) REFERENCES users(email)
+);
+
+- Now, go to the repository:
+
+https://github.com/michelefiorese/InformationSecurityProject
+
+- Here you will find 4 java files you will have to put in your project replacing the already present files
+  These 4 files will have to go under:
+  src/main/java inside your project
+
+- Before using the application you have to do a few changes:
+  first off, go to your desktop and create a folder called "PrivateKeys"
+  then go to the various files of the application and substitute your path everywhere you see
+  "/Users/.../Desktop/PrivateKeys/" with the path to the folder you just created.
+  (it is in 3 different locations in total: once in each file except the LoginServlet)
+
+- At the top of each java file you should substitute the credentials for your database connection.
+
+- At this point you should be able to run the application and use it on your browsers.
+  If you have any trouble setting it up, contact us
+
+Michele Fiorese, Alessio Kerer
